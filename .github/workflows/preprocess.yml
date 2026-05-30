@@ -26,6 +26,7 @@ jobs:
     - name: Run preprocessing script
       working-directory: preprocessing
       run: |
+        ls -la
         python automate_Kevin-Juan-Carlos.py
 
     - name: Commit and push processed data
