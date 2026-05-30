@@ -32,7 +32,7 @@ jobs:
     - name: Commit and push processed data
       uses: EndBug/add-and-commit@v9
       with:
-        add: 'preprocessing/bank_transactions_processed/bank_transactions_processed.csv'
+        add: 'preprocessing/bank_transactions_preprocessing.csv'
         author_name: 'github-actions[bot]'
         author_email: 'github-actions[bot]@users.noreply.github.com'
         message: 'Update pre-processed data'
