@@ -33,14 +33,14 @@ def preprocess_data(input_path, output_path):
     else:
         print(f'Duplicate data after cleaning: {df.duplicated().sum()}')
  
-    # Drop Columns which not Useful for Modeling
+    # Drop columns which not useful for modeling
     drop_cols = ['TransactionID', 'AccountID', 'DeviceID', 'IP Address', 'MerchantID']
     existing_drop = [c for c in drop_cols if c in df.columns]
 
     df.drop(columns=existing_drop, inplace=True)
     print(f'Identifier columns dropped: {existing_drop}')
  
-    # Feature Engineering for TransactionDate Column
+    # Feature engineering for TransactionDate column
     df['TransactionDate'] = pd.to_datetime(df['TransactionDate'], format='mixed', dayfirst=False)
     df['TransactionMonth'] = df['TransactionDate'].dt.month
     df['TransactionDayOfWeek'] = df['TransactionDate'].dt.dayofweek
@@ -49,7 +49,7 @@ def preprocess_data(input_path, output_path):
     df.drop(columns=['TransactionDate'], inplace=True)
     print('Date features extracted')
  
-    # Encode Categorical Features
+    # Encode categorical features
     df['TransactionType'] = df['TransactionType'].map({'Debit': 0, 'Credit': 1})
     le = LabelEncoder()
     for col in ['Channel', 'CustomerOccupation', 'Location']:
@@ -58,7 +58,7 @@ def preprocess_data(input_path, output_path):
 
     print('Categorical features encoded')
  
-    # Login Attempts Binning
+    # Login Attempts binning
     df['LoginAttempts_Bin'] = (df['LoginAttempts'] > 1).astype(int)
  
     # Cap outliers using IQR method
@@ -68,7 +68,7 @@ def preprocess_data(input_path, output_path):
     if df.empty:
         raise ValueError('Dataset is empty after outlier handling')
  
-    # Feature Standardization
+    # Feature standardization
     scaler = StandardScaler()
     df_scaled = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
     print('Feature standardization done')
