@@ -83,5 +83,5 @@ def preprocess_data(input_path, output_path):
 if __name__ == "__main__":
     preprocess_data(
         input_path='../bank_transactions_raw.csv',
-        output_path='bank_transactions_processed.csv',
+        output_path='bank_transactions_processing.csv',
     )
