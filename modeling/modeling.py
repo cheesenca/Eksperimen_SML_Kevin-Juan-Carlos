@@ -27,22 +27,9 @@ def mlflow_setup():
     """
     Setup MLflow tracking URI
     """
-    dagshub_token = os.environ.get("DAGSHUB_TOKEN")
-    dagshub_username = os.environ.get("DAGSHUB_USERNAME")
-    dagshub_repo = os.environ.get("DAGSHUB_REPO")
-
-    if dagshub_token and dagshub_username and dagshub_repo:
-        os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_username
-        os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
-
-        tracking_uri = f"https://dagshub.com/{dagshub_username}/{dagshub_repo}.mlflow"
-        mlflow.set_tracking_uri(tracking_uri)
-        print(f"MLflow tracking URI set to: {tracking_uri}")
-    else:
-        mlflow.set_tracking_uri("http://127.0.0.1:5000")
-        print("MLflow setup locally completed")
-
+    mlflow.set_tracking_uri("http://127.0.0.1:5000")
     mlflow.set_experiment(EXPERIMENT_NAME)
+    print("MLflow setup locally completed")
 
 
 # Load data
